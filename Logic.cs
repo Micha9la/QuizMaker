@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuizMaker
 {
-    internal class Logic
+    public class Logic
     {
     }
 }
