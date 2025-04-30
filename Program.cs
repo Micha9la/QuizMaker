@@ -1,4 +1,6 @@
-﻿namespace QuizMaker
+﻿using System.Reflection.Metadata;
+
+namespace QuizMaker
 {
     internal class Program
     {
@@ -10,15 +12,15 @@
             Console.WriteLine("2 - Play Existing Quiz");
             string choice = Console.ReadLine();
 
-            if (choice == "1")
+            if (choice == Constants.NEW_QUIZ_GAME_MODE)
             {
-                List<QnA> questions = UI.CreateQuiz();  // This method you still need to create to ask user for multiple Qs
-                Logic.SaveQuizToXml(questions, savePath);
+                List<QnA> questions = UIMethods.CreateQuiz();
+                Logic.SaveQuizToXmlFile(questions, Constants.PATH_TO_XML_File);
             }
-            else if (choice == "2")
+            else if (choice == Constants.EXISTING_QUIZ_GAME_MODE)
             {
                 List<QnA> loadedQuiz = Logic.LoadQuizFromXml(loadPath); //part of deserializer you still need to create
-                UI.PlayQuiz(loadedQuiz);
+                UIMethods.PlayQuiz(loadedQuiz);
             }
         }
     }

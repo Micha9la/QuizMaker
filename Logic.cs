@@ -10,7 +10,7 @@ namespace QuizMaker
 {
     public class Logic
     {
-        public static void SafeQuizToXmlFile (List<QnA> questions, string path)
+        public static void SaveQuizToXmlFile (List<QnA> questions, string path)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<QnA>));
             //use this in main but with a CONSTANT: Logic.SafeQuizToXmlFile(questions, @"C:\Users\maria\Desktop\Programming\Rakete\quiz.xml");
@@ -19,6 +19,7 @@ namespace QuizMaker
             serializer.Serialize(file, questions);
             }
         }
+
         //It takes the raw input string from the user (e.g. "1,3") and the number of answers to validate against.
         public static List<int> ParseCorrectAnswerIndices(string userInput, int totalNumberOfOptions)//public and static- Ican call it without creating an instance
         {
