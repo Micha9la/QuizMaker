@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Microsoft.VisualBasic;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace QuizMaker
 {
@@ -38,6 +40,34 @@ namespace QuizMaker
             }
             return correctAnswerIndices; //It returns a list of int — the validated correct answer indices (zero-based).
         }
+
+        public static List<QnA> LoadQuizFromXmlFile(string path)
+        {
+            if (!File.Exists(path)) //File.Exists Method is an existing method in the .NET-framework
+            {
+                Console.WriteLine("Quiz file not found. Please create a quiz first.");
+                return new List<QnA>();
+            }
+
+            try
+            {
+                //Creates a serializer for a **list of QnA objects**.
+                //This knows how to read from an XML file and turn the data into a usable `List < QnA >` object.
+                XmlSerializer serializer = new XmlSerializer(typeof(List<QnA>));
+                //Opens the XML file in read-only mode.
+                //"using" makes sure the file stream is properly closed afterward(even if an error occurs).
+                using (FileStream file = File.OpenRead(path))
+                {
+                    return (List<QnA>)serializer.Deserialize(file);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Failed to load quiz. Error: " + ex.Message);
+                return new List<QnA>();
+            }
+        }
+
     }
 
 }

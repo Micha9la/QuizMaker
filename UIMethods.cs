@@ -62,7 +62,9 @@ namespace QuizMaker
             }
 
         }
-        public static QnA BuildQnA()
+        //Each time BuildSingleQuestionWithAnswers() is called,I get one complete question (with answers and correct indices)
+        //packaged into a single QnA object
+        public static QnA BuildSingleQuestionWithAnswers()
         {
             string question = AskQuestionText();
             int count = AskNumberOfAnswerOptions();
@@ -81,13 +83,14 @@ namespace QuizMaker
         {
             List<QnA> quiz = new List<QnA>();
 
-            Console.WriteLine("How many questions do you want to add?");
+            Console.WriteLine("How many questions do you want to add?");//if 5, user has oportunity to create 5 questions from scratch
             int questionCount = int.Parse(Console.ReadLine());
 
             for (int i = 1; i <= questionCount; i++)
             {
                 Console.WriteLine($"\nCreating question #{i}:");
-                QnA qna = BuildQnA();
+                QnA qna = BuildSingleQuestionWithAnswers(); //This asks for QuestionText, PossibleAnswers, CorrectAnswerIndices
+
                 quiz.Add(qna);
             }
 
