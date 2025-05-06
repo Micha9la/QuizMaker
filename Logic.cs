@@ -11,14 +11,29 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace QuizMaker
 {
     public class Logic
-    {
-        public static void SaveQuizToXmlFile (List<QnA> questions, string path)
+    {       
+        public static void SaveQuizToXmlFile(List<QnA> newQuestions, string path)
         {
+            List<QnA> allQuestions;
+
+            // If file exists, load existing questions, otherwise start with empty list
+            if (File.Exists(path))
+            {
+                allQuestions = LoadQuizFromXmlFile(path);
+            }
+            else
+            {
+                allQuestions = new List<QnA>();
+            }
+
+            // Add new questions to the list
+            allQuestions.AddRange(newQuestions);
+
+            // Serialize and save all questions back to the file
             XmlSerializer serializer = new XmlSerializer(typeof(List<QnA>));
-            //use this in main but with a CONSTANT: Logic.SafeQuizToXmlFile(questions, @"C:\Users\maria\Desktop\Programming\Rakete\quiz.xml");
             using (FileStream file = File.Create(path))
             {
-            serializer.Serialize(file, questions);
+                serializer.Serialize(file, allQuestions);
             }
         }
 
@@ -66,6 +81,15 @@ namespace QuizMaker
                 Console.WriteLine("Failed to load quiz. Error: " + ex.Message);
                 return new List<QnA>();
             }
+        }
+        public static List<QnA> SelectRandomQuestions(List<QnA> allQuestions, int count)
+        {
+            Random rng = new Random(); //rng random number generator
+            //rnt.Next Gives a random integer (each time it’s different).
+            //OrderBy(q => rng.Next()) Shuffles the questions randomly by assigning each question a random number.
+            //Take(count) Picks the first count items (which are now randomized).
+            //ToList()	Converts the result back into a list.
+            return allQuestions.OrderBy(q => rng.Next()).Take(count).ToList();
         }
 
     }

@@ -1,61 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfQnA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <QnA>
-    <QuestionText>What are the primary colors?</QuestionText>
+    <QuestionText>What does "carpe diem" mean?</QuestionText>
     <PossibleAnswers>
-      <string>red</string>
-      <string>blue</string>
-      <string>green</string>
-    </PossibleAnswers>
-    <CorrectAnswerIndices>
-      <int>0</int>
-      <int>1</int>
-    </CorrectAnswerIndices>
-  </QnA>
-  <QnA>
-    <QuestionText>How many legs does a spider have?</QuestionText>
-    <PossibleAnswers>
-      <string>5</string>
-      <string>8</string>
-      <string>6</string>
+      <string>Enjoy Life</string>
+      <string>Use Life</string>
+      <string>You day is going to be wonderful</string>
+      <string>You always meet twice in Life</string>
     </PossibleAnswers>
     <CorrectAnswerIndices>
       <int>1</int>
     </CorrectAnswerIndices>
   </QnA>
   <QnA>
-    <QuestionText>What is paper made of?</QuestionText>
+    <QuestionText>What is the largest mammal in the world?</QuestionText>
     <PossibleAnswers>
-      <string>plastic</string>
-      <string>wood</string>
-      <string>paper doesnt exist</string>
-    </PossibleAnswers>
-    <CorrectAnswerIndices>
-      <int>1</int>
-    </CorrectAnswerIndices>
-  </QnA>
-  <QnA>
-    <QuestionText>From what rays is sunscreen supposed to protect you from?</QuestionText>
-    <PossibleAnswers>
-      <string>UV rays</string>
-      <string>red light</string>
-      <string>blue light</string>
-    </PossibleAnswers>
-    <CorrectAnswerIndices>
-      <int>0</int>
-    </CorrectAnswerIndices>
-  </QnA>
-  <QnA>
-    <QuestionText>What are 2 things you can never eat for breakfast?</QuestionText>
-    <PossibleAnswers>
-      <string>Noodles</string>
-      <string>Potatoes</string>
-      <string>Lunch</string>
-      <string>Dinner</string>
+      <string>Giraffe</string>
+      <string>Elefant</string>
+      <string>Blue Whale</string>
     </PossibleAnswers>
     <CorrectAnswerIndices>
       <int>2</int>
-      <int>3</int>
+    </CorrectAnswerIndices>
+  </QnA>
+  <QnA>
+    <QuestionText>Which animal is known as the 'Ship of the Desert'?</QuestionText>
+    <PossibleAnswers>
+      <string>Antelope</string>
+      <string>Camel</string>
+      <string>Elephant</string>
+    </PossibleAnswers>
+    <CorrectAnswerIndices>
+      <int>1</int>
+    </CorrectAnswerIndices>
+  </QnA>
+  <QnA>
+    <QuestionText>Which bird is often associated with delivering babies in folklore?</QuestionText>
+    <PossibleAnswers>
+      <string>Stork</string>
+      <string>Eagle</string>
+      <string>Pigeon</string>
+      <string>Peacock</string>
+    </PossibleAnswers>
+    <CorrectAnswerIndices>
+      <int>0</int>
+    </CorrectAnswerIndices>
+  </QnA>
+  <QnA>
+    <QuestionText>How many bones do sharks have in their bodies?</QuestionText>
+    <PossibleAnswers>
+      <string>190</string>
+      <string>None (they have cartilage)</string>
+      <string>75</string>
+    </PossibleAnswers>
+    <CorrectAnswerIndices>
+      <int>1</int>
     </CorrectAnswerIndices>
   </QnA>
 </ArrayOfQnA>
