@@ -7,10 +7,7 @@ namespace QuizMaker
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Quiz Maker!");
-            Console.WriteLine("Choose an option:");
-            Console.WriteLine("1 - Create and Save a New Quiz");
-            Console.WriteLine("2 - Play Existing Quiz");
-            string choice = Console.ReadLine();
+            string choice = UIMethods.AskGameMode(); 
 
             if (choice == Constants.NEW_QUIZ_GAME_MODE)
             {
@@ -20,15 +17,8 @@ namespace QuizMaker
             else if (choice == Constants.EXISTING_QUIZ_GAME_MODE)
             {
                 List<QnA> loadedQuiz = Logic.LoadQuizFromXmlFile(Constants.PATH_TO_XML_File); //part of deserializer I still need to create
-                
-                if (loadedQuiz.Count == 0)
-                {
-                    Console.WriteLine("No quiz questions available to play.");
-                }
-                else
-                {
-                    UIMethods.PlayQuiz(loadedQuiz);
-                }
+                UIMethods.RunQuizOrNotifyIfEmpty(loadedQuiz);
+
             }
         }
     }

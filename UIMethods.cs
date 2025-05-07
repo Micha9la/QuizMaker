@@ -9,7 +9,26 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace QuizMaker
 {
     public static class UIMethods
-    {        
+    {   
+        public static string AskGameMode()
+        {
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine(Constants.NEW_QUIZ_GAME_MODE + " - Create and Save a New Quiz");
+            Console.WriteLine(Constants.EXISTING_QUIZ_GAME_MODE + " - Play Existing Quiz");
+            string choice;
+            while (true)
+            {
+                choice = Console.ReadLine();
+
+                if (choice == Constants.NEW_QUIZ_GAME_MODE || choice == Constants.EXISTING_QUIZ_GAME_MODE)
+                {
+                    return choice;
+                }
+
+                Console.WriteLine("Invalid Input.");
+                Console.WriteLine("Type either " + Constants.NEW_QUIZ_GAME_MODE + " or " + Constants.EXISTING_QUIZ_GAME_MODE);
+            }
+        }
         public static string AskQuestionText() 
         {
             Console.WriteLine("Enter a question: ");
@@ -108,11 +127,11 @@ namespace QuizMaker
                 string input = Console.ReadLine();
 
                 //count will hold the number the user types in the console — how many questions they want to play.
-                //It only gets assigned a value if parsing from the input succeeds.
+                //It only gets assigned a value if parsing from the choice succeeds.
                 if (int.TryParse(input, out count) && count >= 1 && count <= maxAvailable)
                     return count;
 
-                Console.WriteLine("Invalid input. Try again.");
+                Console.WriteLine("Invalid choice. Try again.");
             }
         }
 
@@ -125,16 +144,28 @@ namespace QuizMaker
                 Console.WriteLine($"{i + 1}. {question.PossibleAnswers[i]}");
             }
 
-            Console.Write("Your answer(s): ");
-            string input = Console.ReadLine();
-            List<int> userAnswers = Logic.ParseCorrectAnswerIndices(input, question.PossibleAnswers.Count);
+            List<int> userAnswers;
 
+            while (true) 
+            {
+                Console.Write("Your answer(s) (type number(s), e.g. 1 or 1,3): ");
+                string choice = Console.ReadLine();
+
+                userAnswers = Logic.ParseCorrectAnswerIndices(choice, question.PossibleAnswers.Count);
+
+                if (userAnswers.Count > 0)
+                {
+                    break; // valid numeric choice
+                }
+
+                Console.WriteLine("Invalid choice. Please only enter number(s) corresponding to the answer(s).");                          
+            }
             //sort both lists so that their order doesn’t matter when comparing.
-            //Correct answer: [1, 2], User input: [2, 1]
+            //Correct answer: [1, 2], User choice: [2, 1]
             //Sorting makes both into[1, 2], so comparison becomes fair
             userAnswers.Sort();
             question.CorrectAnswerIndices.Sort();
-
+            
             //SequenceEqual compares two lists, item by item, in the same order.
             //If all elements and their order are equal → returns true
             bool isCorrect = userAnswers.SequenceEqual(question.CorrectAnswerIndices);
@@ -142,7 +173,7 @@ namespace QuizMaker
 
             return isCorrect;
         }
-
+        
         public static void PlayQuiz(List<QnA> quiz)
         {
             if (quiz.Count == 0)
@@ -167,5 +198,16 @@ namespace QuizMaker
             Console.WriteLine($"\n You scored {score} out of {questionCount}.");
         }
 
+        public static void RunQuizOrNotifyIfEmpty (List<QnA> loadedQuiz)
+        {
+            if (loadedQuiz.Count == 0)
+                {
+                    Console.WriteLine("No quiz questions available to play.");
+                }
+                else
+                {
+                    UIMethods.PlayQuiz(loadedQuiz);
+                }
+        }
     }
 }
